@@ -46,37 +46,41 @@
 		</form>
 	</div>
 	<script type="text/javascript">
-
 		$('#startDate').datepicker({
 			autoclose: true,
-			 clearBtn: true
-
+			clearBtn: true
 		});
 
 		$('#endDate').datepicker({
 			autoclose: true,
-			 clearBtn: true
+			clearBtn: true
 		});
 
-
+		/**Defined variables */
 		var startInput = document.getElementById('startInput')
 		var endInput = document.getElementById('endInput')
 		var startInputError = document.getElementById('startInputError')
 		var endInputError = document.getElementById('endInputError')
 		var submitBtn = document.getElementById('submit')
 
+		/** Search button disabled upon load of page*/
 		submitBtn.setAttribute("disabled", "disabled");
+
+		/** Function upon change of datepicker */
 		function validate() {
+			/** Get date today */
 			var today = new Date()
+
+			/** Get start date and end date field and convert into date */
 			var startToday = new Date(startInput.value)
 			var endToday = new Date(endInput.value)
+
+			/** date are format by Year/Month/Day */
 			var getCurrentDate = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
 			var getStartDate = startToday.getFullYear()+'/'+(startToday.getMonth()+1)+'/'+startToday.getDate();
 			var getEndDate = endToday.getFullYear()+'/'+(endToday.getMonth()+1)+'/'+endToday.getDate();
 
-			console.log(startInput.value)
-			console.log(endInput.value)
-
+			/** Statement for validation */
 			if (endInput.value != "" && startInput.value == "") startInputError.innerHTML = "Must set the start date."
 			else startInputError.innerHTML= ""
 
@@ -87,15 +91,10 @@
 			else if (getEndDate < getCurrentDate) endInputError.innerHTML = "Date must not be later than the current date and must be later than or the same with the start date."
 			else if (getStartDate < getCurrentDate) startInputError.innerHTML = "Date must not be later than the current date or end date."
 
-
 			if (startInputError.innerHTML == "" && endInputError.innerHTML == "") submitBtn.removeAttribute("disabled");
 			else submitBtn.setAttribute("disabled", "disabled");
 
 			if (startInput.value == endInput.value) endInputError.innerHTML = "Date must not be later than the current date and must be later than or the same with the start date."
-
-			// if (startInput.value == "" ) startInputError.innerHTML = "required"
-			// else if (endInput.value == "") endInputError.innerHTML = "required"
-
 		}
 			   
 	</script>
