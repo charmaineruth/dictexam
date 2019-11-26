@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ANSWER 1</title>
+		<style>
+			.div-container {
+				overflow: hidden;
+			    position: relative;
+			    white-space: nowrap; 
+			    overflow: hidden;
+			    width:350px;
+			    height: 700px;
+			    margin:100px auto;
+			}
+			.division {
+				margin: 0px 20px 10px 20px;
+				padding: 5px;
+				border: solid 1px black;
+				height: 100%;
+				width:100%; 
+				color: white;
+				display:inline-block; 
+				white-space:normal; 
+				vertical-align:top; 
+			}
+			#div-one, #div-three, #div-five, #div-seven, #div-nine  {
+				background-color: #000080;
+			}
+			#div-two ,#div-four ,#div-six ,#div-eight ,#div-ten {
+				background-color: #000;
+			}
+			p {
+				padding-left:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div-container">
+			<div class="division" id="div-one">
+				<p> Div 1 </p>
+				<div class="division" id="div-two">
+					<p> Div 2 </p>
+					<div class="division" id="div-three">
+						<p> Div 3 </p>
+						<div class="division" id="div-four">
+							<p> Div 4 </p>
+							<div class="division" id="div-five">
+								<p> Div 5 </p>
+								<div class="division" id="div-six">
+									<p> Div 6 </p>
+									<div class="division" id="div-seven">
+										<p> Div 7 </p>
+										<div class="division" id="div-eight">
+											<p> Div 8 </p>
+											<div class="division" id="div-nine">
+												<p> Div 9 </p>
+												<div class="division" id="div-ten">
+													<p> Div 10 </p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			/** The sets of color according to arrangement given in the exam */ 
+			var color = ["#800080", "#0F4026", "#008080", "#194A75", "#0000FF"];
+
+			/** Use to loop color based on the order above 'var color' */
+			var i = 0;
+			function loop() {
+			 	i++;
+		  
+				if(i > color.length - 1) {
+					i = 0;
+				}
+			}
+
+			/** Display color on every odd element, first is 'changeColor' function,
+			  * after loop will countinue changing of loop in 'changeColore2' function 
+			*/
+			function changeColor() {
+			  document.getElementById("div-one").style.backgroundColor = color[i];
+			  document.getElementById("div-three").style.backgroundColor = color[i];
+			  document.getElementById("div-five").style.backgroundColor = color[i];
+			  document.getElementById("div-seven").style.backgroundColor = color[i];
+			  document.getElementById("div-nine").style.backgroundColor = color[i];
+
+			  /** Calling the 'loop()' function */
+			  loop();
+			}
+
+			function changeColor2() {
+			  document.getElementById("div-two").style.backgroundColor = color[i];
+			  document.getElementById("div-four").style.backgroundColor = color[i];
+			  document.getElementById("div-six").style.backgroundColor = color[i];
+			  document.getElementById("div-eight").style.backgroundColor = color[i];
+			  document.getElementById("div-ten").style.backgroundColor = color[i];
+
+			  /** Calling the 'loop()' function */
+			  loop();
+			}
+
+			/** Will call the function and set 3 seconds interval every color upon on load of page
+			  * Will display first the default color, after changing the given color will be displayed based on the order that given above
+			  * Will loop colors
+			*/
+			window.onload = function(){
+				/** Will change color first in 3 seconds */
+				setInterval(changeColor, 3000);
+				/** Will follow to change color in 3 seconds */
+				setInterval(changeColor2, 3000);
+			}
+		</script>
+	</body>
+</html>

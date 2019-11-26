@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Answer 3</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- Jquery is use for datepicker plugin -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+	<style type="text/css">
+		.with-error {
+			color: red !important;
+			margin-top:10px;
+		}
+		.container {
+			padding-top: 100px;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="container">
+		 <form>
+			<div class="row">
+	           	<div class="form-group col-md-6">
+		            <label> Start Date</label>
+			        <div class='input-group date' id="startDate" >
+			            <input type='text' value="" id="startInput" class="form-control input-lg" onchange="validate()" required="" />
+			            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			        </div>
+			        <div id="startInputError" class="with-error"> </div>
+		        </div>
+	         	<div class="form-group col-md-6">
+	         		<label> End Date</label>
+			        <div class='input-group date' id="endDate">
+			            <input type='text' value="" id="endInput" class="form-control input-lg"  onchange="validate()" required=""/>
+			            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			        </div>
+			        <div id="endInputError" class="with-error"> </div>
+		        </div>
+			</div>
+			<fieldset>
+				<button onClick="submit()" class="btn btn-primary" id="submit" type="submit">Search</button>
+			</fieldset>
+		</form>
+	</div>
+	<script type="text/javascript">
+
+		$('#startDate').datepicker({
+			autoclose: true,
+			 clearBtn: true
+
+		});
+
+		$('#endDate').datepicker({
+			autoclose: true,
+			 clearBtn: true
+		});
+
+
+		var startInput = document.getElementById('startInput')
+		var endInput = document.getElementById('endInput')
+		var startInputError = document.getElementById('startInputError')
+		var endInputError = document.getElementById('endInputError')
+		var submitBtn = document.getElementById('submit')
+
+		submitBtn.setAttribute("disabled", "disabled");
+		function validate() {
+			var today = new Date()
+			var startToday = new Date(startInput.value)
+			var endToday = new Date(endInput.value)
+			var getCurrentDate = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+			var getStartDate = startToday.getFullYear()+'/'+(startToday.getMonth()+1)+'/'+startToday.getDate();
+			var getEndDate = endToday.getFullYear()+'/'+(endToday.getMonth()+1)+'/'+endToday.getDate();
+
+			console.log(startInput.value)
+			console.log(endInput.value)
+
+			if (endInput.value != "" && startInput.value == "") startInputError.innerHTML = "Must set the start date."
+			else startInputError.innerHTML= ""
+
+			if (startInput.value != "" && endInput.value == "") endInputError.innerHTML = "Must set the start date."
+			else endInputError.innerHTML= ""
+
+			if (getEndDate < getStartDate && getStartDate != "NaN/NaN/NaN") endInputError.innerHTML = "Date must not be later than the current date and must be later than or the same with the start date."
+			else if (getEndDate < getCurrentDate) endInputError.innerHTML = "Date must not be later than the current date and must be later than or the same with the start date."
+			else if (getStartDate < getCurrentDate) startInputError.innerHTML = "Date must not be later than the current date or end date."
+
+
+			if (startInputError.innerHTML == "" && endInputError.innerHTML == "") submitBtn.removeAttribute("disabled");
+			else submitBtn.setAttribute("disabled", "disabled");
+
+			if (startInput.value == endInput.value) endInputError.innerHTML = "Date must not be later than the current date and must be later than or the same with the start date."
+
+			// if (startInput.value == "" ) startInputError.innerHTML = "required"
+			// else if (endInput.value == "") endInputError.innerHTML = "required"
+
+		}
+			   
+	</script>
+</body>
+</html>
